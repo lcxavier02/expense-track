@@ -1,12 +1,15 @@
 import { useGlobalState } from "../context/GlobalContext";
 
 function Balance() {
-  const data = useGlobalState();
+  const { transactions } = useGlobalState();
+
+  const amounts = transactions.map((transaction) => transaction.amount);
+  const total = amounts.reduce((total, amount) => (total += amount), 0);
 
   return (
     <div>
-      <h1>Balance</h1>
-      <h2>{JSON.stringify(data)}</h2>
+      <h3>Your Balance</h3>
+      <h1>${total}</h1>
     </div>
   );
 }
